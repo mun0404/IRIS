@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Envs
+.venv/
+.env
+*.env
+
+# Conda
+conda-meta/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Outputs (decide later if you want to version sample outputs)
+outputs/*.json
+
+# Data (don’t commit raw datasets)
+data/**
+
+# Logs
+*.log
+EOF
