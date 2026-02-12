@@ -1,0 +1,11 @@
+body{font-family:Arial,sans-serif;margin:16px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.alert{padding:10px 14px;border-radius:10px;border:1px solid #ff6b6b;background:#ffe0e0}
+.hidden{display:none}
+.grid{margin-top:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{border-radius:14px;padding:10px;border:5px solid #bbb}
+.card.pass{border-color:#2ecc71}
+.card.fail{border-color:#e74c3c}
+.title{font-weight:bold;margin-bottom:6px}
+.meta{font-size:13px;color:#444;margin-top:6px}
+img{width:100%;border-radius:10px;background:#111}
