@@ -1,0 +1,25 @@
+checkpoints:
+  - id: main_door
+    description: "Main entry door"
+    expected:
+      door_state: CLOSED
+
+  - id: utility_room_door
+    description: "Utility room door"
+    expected:
+      door_state: CLOSED
+
+  - id: aisle_1
+    description: "Aisle 1 must be clear"
+    expected:
+      debris: ABSENT
+
+  - id: aisle_2
+    description: "Aisle 2 must be clear"
+    expected:
+      debris: ABSENT
+
+  - id: control_panel
+    description: "Control panel (not evaluated in v1)"
+    expected:
+      panel_power: ON

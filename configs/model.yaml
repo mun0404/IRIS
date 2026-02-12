@@ -1,0 +1,5 @@
+weights_path: "weights/best.pt"
+device: "cuda:0"          # change to "cpu" if needed
+conf_threshold: 0.25
+imgsz: 640
+throttle_hz: 2            # run inference at most 2 times/sec per camera

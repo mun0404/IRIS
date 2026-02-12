@@ -1,0 +1,6 @@
+camera_topics:
+  aisle_2: "/cam1/rgb/image_raw"
+  main_door: "/cam2/rgb/image_raw"
+  utility_room_door: "/cam3/rgb/image_raw"
+  control_panel: "/cam4/rgb/image_raw"
+  aisle_1: "/cam5/rgb/image_raw"

@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Outputs / runtime artifacts
+outputs/current/
+outputs/runs/
+
+# Logs
+*.log
+
