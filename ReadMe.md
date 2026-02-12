@@ -1,8 +1,6 @@
 
 # IRIS – Inspection & Reporting Intelligence System
 
----
-
 ## Overview
 
 **IRIS** is a demo-ready inspection & reporting intelligence prototype designed to:
@@ -17,13 +15,13 @@ This prototype focuses on:
 
 > **Perception → Condition Evaluation → Structured Reporting → Operator Alerting**
 
----
+
 
 ## Demo Video
 
 [![IRIS Demo](docs/images/dashboard_preview.png)](https://drive.google.com/file/d/1mfZcA0ukRAOetbd4Nhtyr6j0WYDX-CaQ/view?usp=drive_link)
 
----
+
 ## Environment Requirements
 
 - Ubuntu 22.04
@@ -32,7 +30,7 @@ This prototype focuses on:
 - Python 3.10
 - NVIDIA GPU (optional but recommended)
 
----
+
 
 ## Python Dependencies
 
@@ -47,17 +45,17 @@ python3 -m pip install --user \
   pyyaml
 ```
 
----
 
-# What is Simulated vs Real and Assumptions
 
-## Simulated
+## What is Simulated vs Real and Assumptions
+
+### Simulated
 
 - Facility environment (Gazebo)
 - Camera feeds
 - Physical layout
 
-## Real
+### Real
 
 - YOLO model trained on real images
 - Detection logic
@@ -65,34 +63,34 @@ python3 -m pip install --user \
 - Structured inspection output model
 - Dashboard architecture
 
-## Assumptions
+### Assumptions
 
 - Cameras are fixed
 - Each camera maps to one checkpoint
 - Debris detection uses generic object detection
 - Control panel condition not implemented in v1
 
----
 
-## Mock Facility
+
+### Mock Facility
 
 ![Simulated industrial facility in Gazebo with **5 fixed inspection cameras**.](docs/images/factory.jpg)
 
----
 
-## Inspection Checkpoints
+
+### Inspection Checkpoints
 
 | Checkpoint ID       | Description         | Expected Condition |
-|--------------------|--------------------|--------------------|
+|--|--|--|
 | `main_door`        | Main entry door     | CLOSED             |
 | `utility_room_door`| Utility room door   | CLOSED             |
 | `aisle_1`          | Aisle 1             | No debris present  |
 | `aisle_2`          | Aisle 2             | No debris present  |
 | `control_panel`    | Control panel       | ON (placeholder in v1) |
 
----
 
-## System Architecture
+
+### System Architecture
 ``` bash
 Gazebo Simulation (5 Cameras)
             ↓
@@ -113,9 +111,9 @@ Flask Dashboard UI
 Real-time PASS/FAIL + Alerts
 ```
 
----
 
-## Directory Structure
+
+### Directory Structure
 ``` bash
 IRIS/
 │
@@ -152,19 +150,19 @@ IRIS/
 └── run_ui.py
 ```
 
----
 
-# Development Roadmap
+
+## Development Roadmap
 
 I used structured engineering sprints to develop the **IRIS prototype**, each building toward a complete inspection & reporting intelligence pipeline.
 
----
 
-## Sprint 1 — Door State Detection Engine
+
+### Sprint 1 — Door State Detection Engine
 
 **Objective:** Detect whether facility doors are open, closed, or partially open/close.
 
-### Deliverables
+#### Deliverables
 
 - Custom YOLOv8 model trained on door-state dataset
 - Multi-class classification:
@@ -174,7 +172,7 @@ I used structured engineering sprints to develop the **IRIS prototype**, each bu
 - Inference validation on static test images
 - Confidence thresholding and class mapping logic
 
-### Outcome
+#### Outcome
 
 Established the first inspection condition:
 
@@ -186,13 +184,11 @@ Normalised confusion matrix
 ![Door state prediction](docs/images/val_batch1_pred.jpg)
 Door state prediction
 
----
-
-## Sprint 2 — Debris & Obstruction Detection
+### Sprint 2 — Debris & Obstruction Detection
 
 **Objective:** Detect foreign objects or debris in operational aisles.
 
-### Deliverables
+#### Deliverables
 
 - Extended YOLO training to include object categories
 - Debris presence detection logic
@@ -201,20 +197,20 @@ Door state prediction
     - `ABSENT`
 - Failure trigger logic for obstruction scenarios
 
-### Outcome
+#### Outcome
 
 Enabled environmental safety monitoring:
 
 > Automatic aisle clearance validation.
 
 ![Debris prediction](docs/images/val_batch2_labels.jpg)
----
 
-## Sprint 3 — Simulated Inspection Environment
+
+### Sprint 3 — Simulated Inspection Environment
 
 **Objective:** Create a realistic facility simulation to validate perception pipeline end-to-end.
 
-### Deliverables
+#### Deliverables
 
 - Custom Gazebo world configuration
 - 5 inspection checkpoints
@@ -234,7 +230,7 @@ Enabled environmental safety monitoring:
 /cam5/rgb/image_raw
 ```
 
-### Outcome
+#### Outcome
 
 Created a controlled, repeatable testing environment bridging simulation with real ML models.
 
@@ -248,20 +244,20 @@ This marked the transition from isolated model validation to system-level integr
 
 
 
----
 
-## Sprint 4 — Model Consolidation
+
+### Sprint 4 — Model Consolidation
 
 **Objective:** Merge Door and Debris detection into a single unified YOLO model.
 
-### Deliverables
+#### Deliverables
 
 - Consolidated dataset
 - Unified multi-class detection model
 - Simplified inference pipeline
 - Centralized condition evaluation logic
 
-### Outcome
+#### Outcome
 
 Reduced system complexity and improved performance by:
 
@@ -273,13 +269,13 @@ This was a key architectural milestone.
 
 ![Merged Model Normalized Confussion Matrix](docs/images/confusion_matrix_normalized_combined.png)
 
----
 
-## Sprint 5 — Real-Time Inspection Execution & Dashboard
+
+### Sprint 5 — Real-Time Inspection Execution & Dashboard
 
 **Objective:** Execute live inspection on simulated camera feeds and visualize results.
 
-### Deliverables
+#### Deliverables
 
 - ROS2 subscription node
 - YOLO inference on streaming camera data
@@ -292,7 +288,7 @@ This was a key architectural milestone.
 - Visual PASS/FAIL indicators
 - Global alert banner on failures
 
-### Outcome
+#### Outcome
 
 Designed a complete inspection intelligence loop:
 
@@ -308,7 +304,7 @@ Structured Audit Output
 Operator Alert Interface
 ```
 
-### UI Features
+#### UI Features
 
 - Real-time refresh (1 second polling)
 - Visual PASS/FAIL borders
@@ -319,13 +315,13 @@ Operator Alert Interface
 
 ![Dashboard](docs/images/dashboard_preview.png)
 
----
 
-# Running the System
 
----
+## Running the System
 
-## Step 1 — Launch Gazebo
+
+
+### Step 1 — Launch Gazebo
 
 Export the model paths that are used in the Gazebo model.
 
@@ -355,9 +351,9 @@ Expected:
 /cam5/rgb/image_raw
 ```
 
----
 
-## Step 2 — Run Inference Node
+
+### Step 2 — Run Inference Node
 
 Open new terminal (Terminal A):
 
@@ -383,9 +379,9 @@ The node will now:
 - Save annotated images
 - Write structured outputs
 
----
 
-## Step 3 — Run Dashboard UI
+
+### Step 3 — Run Dashboard UI
 
 Open another terminal (Terminal B):
 
@@ -400,15 +396,15 @@ Open browser:
 http://127.0.0.1:5000
 ```
 
----
 
-# Inspection Output Model
+
+## Inspection Output Model
 
 For each checkpoint, the system generates:
 
----
 
-## Event Structure (`events.jsonl`)
+
+### Event Structure (`events.jsonl`)
 
 ```json
 {
@@ -428,9 +424,9 @@ For each checkpoint, the system generates:
 }
 ```
 
----
 
-## `latest.json` (UI Source)
+
+### `latest.json` (UI Source)
 
 Contains the most recent state of each checkpoint.
 
@@ -440,11 +436,11 @@ Used by dashboard to render:
 - Red border → FAIL
 - Global alert banner if any FAIL
 
----
 
-# Condition Evaluation Logic
 
-## Door State
+## Condition Evaluation Logic
+
+### Door State
 
 Detected classes:
 
@@ -462,9 +458,9 @@ door_semi   → SEMI
 
 PASS if `observed == expected`.
 
----
 
-## Debris Detection
+
+### Debris Detection
 
 Any detected object that is **NOT a door class** is considered debris.
 
@@ -480,9 +476,9 @@ Otherwise:
 observed = ABSENT
 ```
 
----
 
-# Future Improvements
+
+## Future Improvements
 
 - Add indicator light detection
 - Add control panel ON/OFF detection
@@ -494,9 +490,9 @@ observed = ABSENT
 - Add anomaly confidence scoring
 - Add temporal smoothing across frames
 
----
 
-# Conclusion
+
+## Conclusion
 
 IRIS demonstrates a working inspection intelligence pipeline:
 
