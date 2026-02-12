@@ -503,3 +503,12 @@ IRIS demonstrates a working inspection intelligence pipeline:
 - Real-time operator alerting
 
 It serves as a foundation for scalable inspection systems.
+
+## Datasets used.
+
+### Doors: 
+- Door detection and classification: https://drive.google.com/drive/folders/1iSrPjO-F2aaB7MmsN7tsU1wnLtnO3euK
+- DeepDoors2: https://drive.google.com/drive/folders/1SxVKeJ9RBcoJXHSHw-LWaLGG07BZT-b5
+
+### Gazebo World:
+- Dataset of Gazebo Worlds Models and Maps: https://github.com/mlherd/Dataset-of-Gazebo-Worlds-Models-and-Maps
