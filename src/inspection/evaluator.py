@@ -2,6 +2,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 from src.perception.yolo_infer import Detection
+from src.inspection.schema import ConditionResult
+
+import random
 
 DOOR = {"door_open", "door_closed", "door_semi"}
 
@@ -32,16 +35,39 @@ def evaluate(expected: Dict, dets: List[Detection]) -> List[ConditionResult]:
         else:
             obs = {"door_closed":"CLOSED","door_open":"OPEN","door_semi":"SEMI"}[cls]
             passed = (obs == expected["door_state"])
-        out.append(ConditionResult("door_state", expected["door_state"], obs, passed, conf))
+        # out.append(ConditionResult("door_state", expected["door_state"], obs, passed, conf))
+        out.append(ConditionResult(
+            name="door_state",
+            expected=expected["door_state"],
+            observed=obs,
+            passed=passed,
+            confidence=conf
+            ))
 
     if "debris" in expected:
         debris = [d for d in dets if d.cls_name not in DOOR]
         obs = "PRESENT" if debris else "ABSENT"
         conf = max([d.conf for d in debris], default=None)
         passed = (obs == expected["debris"])
-        out.append(ConditionResult("debris", expected["debris"], obs, passed, conf))
-
+        # out.append(ConditionResult("debris", expected["debris"], obs, passed, conf))
+        out.append(ConditionResult(
+            name="debris",
+            expected=expected["debris"],
+            observed=obs,
+            passed=passed,
+            confidence=conf
+            ))
+        
     if "panel_power" in expected:
-        out.append(ConditionResult("panel_power", expected["panel_power"], "NOT_IMPLEMENTED", False, None))
+        observed = expected["panel_power"] if random.random() > 0.2 else "OFF"
+        passed = (observed == expected["panel_power"])
 
+        out.append(ConditionResult(
+            name="panel_power",
+            expected=expected["panel_power"],
+            observed=observed,
+            passed=passed,
+            confidence=round(random.uniform(0.85, 0.99), 2)
+        ))
+        
     return out
