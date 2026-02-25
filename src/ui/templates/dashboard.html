@@ -6,11 +6,88 @@
   <link rel="stylesheet" href="/static/styles.css"/>
 </head>
 <body>
+
+  <!-- Header / Run Summary -->
   <div class="top">
-    <h1>IRIS Dashboard</h1>
-    <div id="alert" class="alert hidden">⚠️ ALERT: One or more checkpoints FAILED</div>
+    <div class="top-left">
+      <h1>IRIS – Inspection Dashboard</h1>
+      <div class="subtitle">Inspection Run Executed (Robot-Based Inspection)</div>
+    </div>
+
+    <div class="top-right">
+      <div id="alert" class="alert hidden">⚠️ ALERT: One or more checkpoints FAILED</div>
+    </div>
   </div>
+
+  <!-- Run metadata panel -->
+  <div class="runbar">
+    <div class="runbar-row">
+      <div class="runitem">
+        <div class="label">Run ID</div>
+        <div class="value" id="run_id">—</div>
+      </div>
+      <div class="runitem">
+        <div class="label">Run Start (UTC)</div>
+        <div class="value" id="run_start">—</div>
+      </div>
+      <div class="runitem">
+        <div class="label">Robot State</div>
+        <div class="value" id="robot_state">—</div>
+      </div>
+      <div class="runitem">
+        <div class="label">Last Updated (UTC)</div>
+        <div class="value" id="last_updated">—</div>
+      </div>
+    </div>
+
+    <div class="runbar-row">
+      <div class="runitem">
+        <div class="label">Total Checkpoints</div>
+        <div class="value" id="total_cp">—</div>
+      </div>
+      <div class="runitem">
+        <div class="label">Passed</div>
+        <div class="value" id="passed_cp">—</div>
+      </div>
+      <div class="runitem">
+        <div class="label">Failed</div>
+        <div class="value" id="failed_cp">—</div>
+      </div>
+      <div class="runitem">
+        <div class="label">Overall</div>
+        <div class="value" id="overall_status">—</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="btn_start">Start Inspection Run</button>
+        <button class="btn" id="btn_pass">Simulate Pass</button>
+        <button class="btn" id="btn_fail">Simulate Fail</button>
+        <button class="btn" id="btn_reset">Reset Run</button>
+
+        <a class="btn" href="/download/json">Download JSON</a>
+        <a class="btn" href="/download/csv">Download CSV</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid of checkpoints -->
   <div id="grid" class="grid"></div>
+
+  <!-- Modal for condition details (Step #2) -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" id="modal_title">Checkpoint Details</div>
+          <div class="modal-subtitle" id="modal_subtitle">—</div>
+        </div>
+        <button id="modal_close" class="btn">Close</button>
+      </div>
+
+      <div id="modal_body" class="modal-body"></div>
+    </div>
+  </div>
+
   <script src="/static/app.js"></script>
 </body>
 </html>
